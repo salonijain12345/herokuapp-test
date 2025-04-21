@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
+<<<<<<< HEAD
 	<name>herokuapp</name>
+=======
+	<name>heroapp</name>
+>>>>>>> e913f3a (updated till context menu)
 	<comment></comment>
 	<projects>
 	</projects>
