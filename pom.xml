@@ -4,17 +4,11 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>projectself</groupId>
-<<<<<<< HEAD
-  <artifactId>herokuapp</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
-
-  <name>herokuapp</name>
-=======
-  <artifactId>heroapp</artifactId>
+ <artifactId>heroapp</artifactId>
   <version>0.0.1-SNAPSHOT</version>
 
   <name>heroapp</name>
->>>>>>> e913f3a (updated till context menu)
+
   <!-- FIXME change it to the project's website -->
   <url>http://www.example.com</url>
 
@@ -32,8 +26,6 @@
         <type>pom</type>
         <scope>import</scope>
       </dependency>
-<<<<<<< HEAD
-      <!-- https://mvnrepository.com/artifact/io.github.bonigarcia/webdrivermanager -->
 <dependency>
     <groupId>io.github.bonigarcia</groupId>
     <artifactId>webdrivermanager</artifactId>
@@ -105,8 +97,7 @@
             <artifactId>selenium-devtools-v113</artifactId>
             <version>4.9.1</version>
         </dependency>
-=======
->>>>>>> e913f3a (updated till context menu)
+
     </dependencies>
   </dependencyManagement>
 
@@ -122,8 +113,7 @@
       <artifactId>junit-jupiter-params</artifactId>
       <scope>test</scope>
     </dependency>
-<<<<<<< HEAD
-=======
+
     <!-- https://mvnrepository.com/artifact/io.rest-assured/rest-assured -->
 <dependency>
     <groupId>io.rest-assured</groupId>
@@ -148,7 +138,7 @@
     <version>7.11.0</version>
     <scope>test</scope>
 </dependency>
->>>>>>> e913f3a (updated till context menu)
+
   </dependencies>
 
   <build>
