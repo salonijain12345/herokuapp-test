@@ -163,8 +163,10 @@ public class SAT {
         driver.navigate().back();
         
         //Entry Ad
-        
-        
+        driver.findElement(By.linkText("Entry Ad")).click();
+        driver.findElement(By.cssSelector(".modal-footer p")).click();
+        driver.navigate().back();
+       
       //  driver.close();
     }
 }
