@@ -13,6 +13,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
@@ -25,7 +26,7 @@ public class SAT {
         ChromeOptions options = new ChromeOptions();
         options.setCapability("se:cdpVersion", "");
         WebDriver driver = new ChromeDriver(options);
-        
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.manage().window().maximize();
         driver.get("https://admin:admin@the-internet.herokuapp.com/");
@@ -109,12 +110,61 @@ public class SAT {
 
         // Disappearing Elements
         driver.findElement(By.linkText("Disappearing Elements")).click();
+        driver.findElement(By.linkText("Portfolio")).click();
+       System.out.print(driver.findElement(By.xpath("/html/body/h1")).getText());
+       driver.navigate().back();
+        driver.findElement(By.linkText("Contact Us")).click();
+        System.out.print(driver.findElement(By.xpath("/html/body/h1")).getText());
         driver.navigate().back();
+        driver.findElement(By.linkText("About")).click();
+        System.out.print(driver.findElement(By.xpath("/html/body/h1")).getText());
+        driver.navigate().back();
+        driver.findElement(By.linkText("Home")).click();
+
 
         // Drag and Drop
         driver.findElement(By.linkText("Drag and Drop")).click();
+        WebElement source = driver.findElement(By.id("column-a"));
+        WebElement target = driver.findElement(By.id("column-b"));
+        actions.dragAndDrop(source, target).build().perform();
+        driver.navigate().back();
+        
+        //dropdown
+        driver.findElement(By.linkText("Dropdown")).click();
+        WebElement dropdownElement = driver.findElement(By.id("dropdown"));
+        Select dropdown = new Select(dropdownElement);
+        dropdown.selectByVisibleText("Option 1");
+        dropdown.selectByIndex(2);
         driver.navigate().back();
 
-        driver.close();
+        //Dynamic Controls
+        driver.findElement(By.linkText("Dynamic Controls")).click();
+        driver.findElement(By.xpath("//div[@id='checkbox']//input[@type='checkbox']")).click();
+        driver.findElement(By.xpath("//button[text()='Remove']")).click();
+        driver.findElement(By.xpath("//button[text()='Enable']")).click();
+        Thread.sleep(1000);
+        driver.findElement(By.xpath("//button[text()='Disable']")).click();
+        driver.navigate().back();
+        
+        //Dynamic Loading
+        
+        driver.findElement(By.linkText("Dynamic Loading")).click();
+        driver.findElement(By.linkText("Example 1: Element on page that is hidden")).click();
+        driver.findElement(By.xpath("//button[text()='Start']")).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='finish']/h4")));
+        System.out.println(driver.findElement(By.xpath("//div[@id='finish']/h4")).getText());
+        driver.navigate().back();
+        
+        driver.findElement(By.linkText("Example 2: Element rendered after the fact")).click();
+        driver.findElement(By.xpath("//button[text()='Start']")).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='finish']/h4")));
+        System.out.println(driver.findElement(By.xpath("//div[@id='finish']/h4")).getText());
+        driver.navigate().back();
+        driver.navigate().back();
+        
+        //Entry Ad
+        
+        
+      //  driver.close();
     }
 }
