@@ -173,7 +173,7 @@ public class SAT {
         //exit_intent
         driver.findElement(By.linkText("Exit Intent")).click();
         //move courser to toll bar
-        Thread.sleep(2000);
+        Thread.sleep(4000);
         System.out.println(driver.findElement(By.cssSelector(".modal-footer p")).getText());
         driver.findElement(By.cssSelector(".modal-footer p")).click();
         driver.navigate().back();
@@ -216,6 +216,41 @@ public class SAT {
         driver.navigate().back();
         driver.navigate().back();
         
-      //  driver.close();
+        //Frames
+        driver.findElement(By.linkText("Frames")).click();
+        driver.findElement(By.linkText("Nested Frames")).click();
+        driver.switchTo().frame("frame-top");
+        driver.switchTo().frame("frame-left");
+	    System.out.println(driver.findElement(By.tagName("body")).getText());
+	    driver.navigate().back();
+	    
+	    driver.findElement(By.linkText("Nested Frames")).click();
+	    driver.switchTo().frame("frame-top");
+		driver.switchTo().frame("frame-middle");
+	    System.out.println(driver.findElement(By.tagName("body")).getText());
+	    driver.navigate().back();
+	    
+	    driver.findElement(By.linkText("iFrame")).click();
+	    driver.findElement(By.cssSelector(".tox-notification__dismiss")).click();
+	    driver.switchTo().frame("mce_0_ifr");
+	    System.out.println(driver.findElement(By.tagName("body")).getText());
+        driver.navigate().back();
+        driver.navigate().back();
+        
+	  //Geolocation
+        driver.findElement(By.linkText("Geolocation")).click();  
+        driver.findElement(By.xpath("//button[text()='Where am I?']")).click();
+        Thread.sleep(1000);
+        System.out.println("Location result: " + driver.findElement(By.id("demo")).getText());
+        
+        
+        //Horizontal Slider
+        driver.findElement(By.linkText("Horizontal Slider")).click(); 
+        
+        actions.clickAndHold(driver.findElement(By.tagName("input"))).moveByOffset(40, 0).release().perform();
+        System.out.println( driver.findElement(By.id("range")).getText());
+        
+        
+        //driver.close();
     }
 }
