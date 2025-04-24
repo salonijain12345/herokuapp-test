@@ -198,6 +198,24 @@ public class SAT {
        System.out.println("Floating menu is visible after scroll.");
         driver.navigate().back();
         
+          //Forgot Password
+        driver.findElement(By.linkText("Forgot Password")).click();
+        driver.findElement(By.id("email")).sendKeys("abc@gmail.com");
+        driver.findElement(By.id("form_submit")).click();
+        driver.navigate().back();
+        driver.navigate().back();
+        
+         //Form Authentication
+        driver.findElement(By.linkText("Form Authentication")).click();
+        driver.findElement(By.id("username")).sendKeys("tomsmith");
+        driver.findElement(By.id("password")).sendKeys("SuperSecretPassword!");
+        driver.findElement(By.className("radius")).click();
+        driver.findElement(By.linkText("Logout")).click();
+        Thread.sleep(2000);
+        driver.navigate().back();
+        driver.navigate().back();
+        driver.navigate().back();
+        
       //  driver.close();
     }
 }
