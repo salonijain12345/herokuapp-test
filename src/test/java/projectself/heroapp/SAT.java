@@ -30,6 +30,8 @@ public class SAT {
         WebDriver driver = new ChromeDriver(options);
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         Actions actions = new Actions(driver);
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.manage().window().maximize();
         driver.get("https://admin:admin@the-internet.herokuapp.com/");
@@ -190,7 +192,6 @@ public class SAT {
         
         //Floating Menu
         driver.findElement(By.linkText("Floating Menu")).click();
-        JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("window.scrollTo(0, document.body.scrollHeight);");
         Thread.sleep(2000);
        WebElement menu= driver.findElement(By.id("menu"));
@@ -242,15 +243,36 @@ public class SAT {
         driver.findElement(By.xpath("//button[text()='Where am I?']")).click();
         Thread.sleep(1000);
         System.out.println("Location result: " + driver.findElement(By.id("demo")).getText());
-        
+        driver.navigate().back();
         
         //Horizontal Slider
         driver.findElement(By.linkText("Horizontal Slider")).click(); 
         
         actions.clickAndHold(driver.findElement(By.tagName("input"))).moveByOffset(40, 0).release().perform();
         System.out.println( driver.findElement(By.id("range")).getText());
+        driver.navigate().back();
         
+          //Hovers
+          driver.findElement(By.linkText("Hovers")).click();
+          actions.moveToElement(driver.findElement(By.className("figure"))).perform();
+          driver.findElement(By.linkText("View profile")).click();
+          driver.navigate().back();
+          driver.navigate().back();
+          
+          //Infinite Scroll
+        driver.findElement(By.linkText("Infinite Scroll")).click();
+        for(int i=0;i<5;i++)
+        { js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
+        Thread.sleep(2000); 
+        System.out.println("Scrolled down: " + (i + 1));}
+          driver.navigate().back();
         
-        //driver.close();
+          //Inputs
+        driver.findElement(By.linkText("Inputs")).click();
+        driver.findElement(By.tagName("input")).sendKeys("25");
+        System.out.println(driver.findElement(By.tagName("input")).getAttribute("value"));
+        driver.navigate().back();
+        
+        driver.close();
     }
 }
