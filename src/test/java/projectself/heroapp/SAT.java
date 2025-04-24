@@ -6,6 +6,8 @@ import java.util.List;
 
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -27,6 +29,7 @@ public class SAT {
         options.setCapability("se:cdpVersion", "");
         WebDriver driver = new ChromeDriver(options);
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        Actions actions = new Actions(driver);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.manage().window().maximize();
         driver.get("https://admin:admin@the-internet.herokuapp.com/");
@@ -96,7 +99,7 @@ public class SAT {
 
         // Context Menu
         driver.findElement(By.linkText("Context Menu")).click();
-        Actions actions = new Actions(driver);
+        
         actions.contextClick(driver.findElement(By.id("hot-spot"))).perform();
         Alert alert = driver.switchTo().alert();
         System.out.println(alert.getText());
@@ -166,7 +169,35 @@ public class SAT {
         driver.findElement(By.linkText("Entry Ad")).click();
         driver.findElement(By.cssSelector(".modal-footer p")).click();
         driver.navigate().back();
-       
+        
+        //exit_intent
+        driver.findElement(By.linkText("Exit Intent")).click();
+        //move courser to toll bar
+        Thread.sleep(2000);
+        System.out.println(driver.findElement(By.cssSelector(".modal-footer p")).getText());
+        driver.findElement(By.cssSelector(".modal-footer p")).click();
+        driver.navigate().back();
+        
+        //File Download
+        driver.findElement(By.linkText("File Download")).click();
+        driver.findElement(By.linkText("sampleFile.jpeg")).click();
+        
+        //file upload
+        driver.findElement(By.linkText("File Upload")).click();
+        driver.findElement(By.id("file-upload")).sendKeys("C:\\Users\\saloni jain\\Downloads\\samplefile.jpeg");
+        driver.findElement(By.id("file-submit")).click();
+        driver.navigate().back();
+        
+        //Floating Menu
+        driver.findElement(By.linkText("Floating Menu")).click();
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollTo(0, document.body.scrollHeight);");
+        Thread.sleep(2000);
+       WebElement menu= driver.findElement(By.id("menu"));
+       if(menu.isDisplayed())
+       System.out.println("Floating menu is visible after scroll.");
+        driver.navigate().back();
+        
       //  driver.close();
     }
 }
